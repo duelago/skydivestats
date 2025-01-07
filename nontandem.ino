@@ -8,7 +8,9 @@ const char* ssid = "Alter_3G";
 const char* password = "fanta8tter";
 
 // URL to fetch data
-const char* url = "https://demo.skywin.se/api/v1/reports/jump-stats.json";
+// const char* url = "https://demo.skywin.se/api/v1/reports/jump-stats.json";
+//TEST URL
+const char* url = "http://www.hoppaiplurret.se/jump.php";
 
 // Stepper motor pins
 #define IN1 D1
