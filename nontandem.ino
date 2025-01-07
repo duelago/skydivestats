@@ -18,12 +18,15 @@
 ESP8266WebServer server(80);
 AccelStepper stepper(AccelStepper::HALF4WIRE, IN1, IN3, IN2, IN4);
 String jsonUrl;
-int previousNonTandem = 0;
+int previousTandem = 0;
 unsigned long lastFetchTime = 0;
-const unsigned long fetchInterval = 3600000; // 1 hour in milliseconds
+//const unsigned long fetchInterval = 3600000; // 1 hour in milliseconds
+const unsigned long fetchInterval = 20000; // test
 
 const char* authUsername = "skydive";
 const char* authPassword = "jump";
+
+// TEST URL JSON http://www.hoppaiplurret.se/jump.php
 
 void setup() {
   Serial.begin(115200);
@@ -34,7 +37,7 @@ void setup() {
 
   // WiFi configuration with WiFiManager
   WiFiManager wifiManager;
-  wifiManager.autoConnect("ESP8266-Stepper");
+  wifiManager.autoConnect("JumpStats");
   Serial.println("WiFi connected!");
 
   // Set up web server routes
@@ -74,8 +77,10 @@ void calibrateToZero() {
 
 void fetchData() {
   if (WiFi.status() == WL_CONNECTED && jsonUrl.length() > 0) {
+    WiFiClient client;
     HTTPClient http;
-    http.begin(jsonUrl);
+
+    http.begin(client, jsonUrl);  // Updated to use WiFiClient
 
     int httpCode = http.GET();
     if (httpCode == HTTP_CODE_OK) {
@@ -85,14 +90,14 @@ void fetchData() {
       DynamicJsonDocument doc(1024);
       deserializeJson(doc, payload);
 
-      int nonTandem = doc["result"][0]["NonTandem"];
-      Serial.println("NonTandem: " + String(nonTandem));
+      int tandem = doc["result"][0]["Tandem"];
+      Serial.println("Tandem: " + String(tandem));
 
-      int stepsToMove = (nonTandem - previousNonTandem) * (4000 / 4000);
+      int stepsToMove = (tandem - previousTandem) * (4000 / 4000);
       stepper.moveTo(stepper.currentPosition() + stepsToMove);
       stepper.runToPosition();
 
-      previousNonTandem = nonTandem;
+      previousTandem = tandem;
     } else {
       Serial.println("Error fetching data: " + String(httpCode));
     }
@@ -103,13 +108,14 @@ void fetchData() {
   }
 }
 
+
 void handleRoot() {
   if (!server.authenticate(authUsername, authPassword)) {
     return server.requestAuthentication();
   }
 
-  String html = "<html><head><title>ESP8266 Stepper Control</title></head><body>";
-  html += "<h1>ESP8266 Stepper Control</h1>";
+  String html = "<html><head><title>JumpStats</title></head><body>";
+  html += "<h1>Jump Stats url</h1>";
   html += "<form action='/set-url' method='POST'>";
   html += "<label for='url'>JSON URL:</label><br>";
   html += "<input type='text' id='url' name='url' value='" + jsonUrl + "'><br><br>";
