@@ -1,4 +1,4 @@
-# skydivestats
+# Skydivestats
 
 Use a 3D printed altimeter to show jump statistics from the Skywin database<p>
 
