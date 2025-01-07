@@ -20,17 +20,20 @@ AccelStepper stepper(AccelStepper::HALF4WIRE, IN1, IN3, IN2, IN4);
 String jsonUrl;
 int previousTandem = 0;
 unsigned long lastFetchTime = 0;
-//const unsigned long fetchInterval = 3600000; // 1 hour in milliseconds
-const unsigned long fetchInterval = 20000; // test
+const unsigned long fetchInterval = 20000; // 20 seconds for testing
 
 const char* authUsername = "skydive";
 const char* authPassword = "jump";
 
-// TEST URL JSON http://www.hoppaiplurret.se/jump.php
+// Calibration state
+bool isCalibrating = true;
 
 void setup() {
   Serial.begin(115200);
   EEPROM.begin(512);
+
+  // Configure Hall sensor pin
+  pinMode(HALL_SENSOR_PIN, INPUT_PULLUP);
 
   // Load URL from EEPROM
   loadUrlFromEEPROM();
@@ -51,7 +54,7 @@ void setup() {
   stepper.setMaxSpeed(1000);
   stepper.setAcceleration(500);
 
-  // Calibrate to zero position
+  // Start calibration process in non-blocking way
   calibrateToZero();
 }
 
@@ -63,24 +66,50 @@ void loop() {
     fetchData();
     lastFetchTime = millis();
   }
+
+  // If still calibrating, let the motor run in background
+  if (isCalibrating) {
+    stepper.run();
+  }
 }
 
 void calibrateToZero() {
   Serial.println("Calibrating to zero position...");
+  delay(1000);  // Delay to allow initialization
+
+  // Move motor in reverse direction continuously
+  stepper.setMaxSpeed(500);
   stepper.setSpeed(-500);
-  while (digitalRead(HALL_SENSOR_PIN) == HIGH) {
-    stepper.runSpeed();
+  stepper.moveTo(-1000000);  // Arbitrary large negative number to keep the motor moving
+
+  while (true) {
+    stepper.run();  // Continuously run the motor
+
+    // Print status occasionally to reduce flooding
+    static unsigned long lastPrintTime = 0;
+    if (millis() - lastPrintTime > 500) {
+      Serial.println("Searching for Hall sensor...");
+      lastPrintTime = millis();
+    }
+
+    // If the Hall sensor is triggered, stop the motor and set current position to zero
+    if (digitalRead(HALL_SENSOR_PIN) == LOW) {  // Assuming LOW indicates sensor triggered
+      stepper.stop();  // Stop the motor
+      stepper.setCurrentPosition(0);  // Set the current position to zero
+      Serial.println("Calibration complete.");
+      isCalibrating = false;  // Mark calibration as done
+      break;
+    }
   }
-  stepper.setCurrentPosition(0);
-  Serial.println("Calibration complete.");
 }
+
 
 void fetchData() {
   if (WiFi.status() == WL_CONNECTED && jsonUrl.length() > 0) {
     WiFiClient client;
     HTTPClient http;
 
-    http.begin(client, jsonUrl);  // Updated to use WiFiClient
+    http.begin(client, jsonUrl);
 
     int httpCode = http.GET();
     if (httpCode == HTTP_CODE_OK) {
@@ -108,21 +137,93 @@ void fetchData() {
   }
 }
 
-
 void handleRoot() {
   if (!server.authenticate(authUsername, authPassword)) {
     return server.requestAuthentication();
   }
 
-  String html = "<html><head><title>JumpStats</title></head><body>";
-  html += "<h1>Jump Stats url</h1>";
-  html += "<form action='/set-url' method='POST'>";
-  html += "<label for='url'>JSON URL:</label><br>";
-  html += "<input type='text' id='url' name='url' value='" + jsonUrl + "'><br><br>";
-  html += "<input type='submit' value='Save'>";
-  html += "</form><br>";
-  html += "<a href='/update'>Firmware Update (OTA)</a>";
-  html += "</body></html>";
+  String html = R"rawliteral(
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>JumpStats</title>
+      <style>
+        body {
+          font-family: 'Arial', sans-serif;
+          background-color: #f0f8ff;
+          margin: 0;
+          padding: 20px;
+        }
+        h1 {
+          color: #333;
+          text-align: center;
+        }
+        form {
+          max-width: 400px;
+          margin: 0 auto;
+          background-color: #ffffff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        label {
+          display: block;
+          margin-bottom: 8px;
+          font-weight: bold;
+        }
+        input[type="text"] {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 20px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+        input[type="submit"] {
+          width: 100%;
+          padding: 10px;
+          background-color: #007bff;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+        input[type="submit"]:hover {
+          background-color: #0056b3;
+        }
+        a {
+          display: block;
+          text-align: center;
+          margin-top: 20px;
+          color: #007bff;
+          text-decoration: none;
+        }
+        a:hover {
+          color: #0056b3;
+        }
+        @media (max-width: 600px) {
+          body {
+            padding: 10px;
+          }
+          form {
+            padding: 15px;
+          }
+        }
+      </style>
+    </head>
+    <body>
+      <h1>JumpStats URL</h1>
+      <form action='/set-url' method='POST'>
+        <label for='url'>JSON URL:</label>
+        <input type='text' id='url' name='url' value=')rawliteral" + jsonUrl + R"rawliteral('>
+        <input type='submit' value='Save'>
+      </form>
+      <a href='/update'>Firmware Update (OTA)</a>
+    </body>
+    </html>
+  )rawliteral";
+
   server.send(200, "text/html", html);
 }
 
