@@ -29,8 +29,9 @@ You need to press fit the magnet to the altimeter arrow. One drop of super glue 
 
 
 ![magnet](https://github.com/user-attachments/assets/76e0444e-bc5e-41e1-bdf5-dba43e394bee)
+<p></p>
 
-
+![konstruktion](https://github.com/user-attachments/assets/51103a65-30be-4187-b6d7-d2adb28c1851)
 
 
 <img width="1203" alt="Screenshot 2025-01-09 at 13 30 09" src="https://github.com/user-attachments/assets/0e7f977a-1ea7-419f-aa28-9c3d9fb0741a" />
@@ -42,5 +43,5 @@ You need to press fit the magnet to the altimeter arrow. One drop of super glue 
 <img width="1120" alt="Screenshot 2025-01-09 at 13 37 44" src="https://github.com/user-attachments/assets/b1154d37-042d-4638-ad00-f5998d7a0614" />
 
 
-![konstruktion](https://github.com/user-attachments/assets/51103a65-30be-4187-b6d7-d2adb28c1851)
+
 
