@@ -7,17 +7,23 @@ Demo JSON url with more random numbers between reload: http://www.hoppaiplurret.
 <br><br>
 <b>Example output:</b><br> {"name":"jump-stats","params":"[jumpYear:2025]","result":[{"Tandem":0,"NonTandem":114}],"size":2}<p></p>
 
-Idea is to use a stepper motor and a hall sensor and to move the motor to represent the number of jumps made the current season. The first version here is for tandems.
-
+Idea is to use a stepper motor and a hall sensor and to move the motor to represent the number of jumps made the current season. The first version here is for tandems.<br>
+<b>Steps to do:</b>
+<br>
 - 3D print the parts. It is easiest on a Bambulab with AMS, but possible on a normal printer with two color changes.-p></p>
 
-Buy the following:<br>
+<b>Buy the following:</b><br>
 - Wemos d1 mini v3 :https://www.aliexpress.com/item/4000030041652.html<br>
 - Stepper motor with driver board: 28BYJ-48-5V + Driver Board ULN2003:https://www.aliexpress.com/item/1005006781616785.html<br>
 - KY-024 hall sensor: https://www.aliexpress.com/item/1005007847486915.html<br>
 - Magnet: https://www.aliexpress.com/item/1005004351705901.html<br>
+- M 2.5 skruvar<br>
 - Dupont cables for soldering<br>
 - Microusb cable<p></p>
+
+![konstruktion](https://github.com/user-attachments/assets/9058855b-07ca-47b3-beed-7d6d758a918f)
+
+
 
 <img width="1203" alt="Screenshot 2025-01-09 at 13 30 09" src="https://github.com/user-attachments/assets/0e7f977a-1ea7-419f-aa28-9c3d9fb0741a" />
 <br>
