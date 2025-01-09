@@ -103,7 +103,6 @@ void calibrateToZero() {
   }
 }
 
-
 void fetchData() {
   if (WiFi.status() == WL_CONNECTED && jsonUrl.length() > 0) {
     WiFiClient client;
@@ -122,8 +121,12 @@ void fetchData() {
       int tandem = doc["result"][0]["Tandem"];
       Serial.println("Tandem: " + String(tandem));
 
-      int stepsToMove = (tandem - previousTandem) * (4000 / 4000);
-      stepper.moveTo(stepper.currentPosition() + stepsToMove);
+      // Calculate steps to move
+      int targetSteps = map(tandem, 0, 4000, 0, 4096);
+      int stepsToMove = targetSteps - stepper.currentPosition();
+      stepper.moveTo(targetSteps);
+
+      // Run the motor to the new position
       stepper.runToPosition();
 
       previousTandem = tandem;
