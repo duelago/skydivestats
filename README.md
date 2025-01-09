@@ -14,7 +14,7 @@ Idea is to use a stepper motor and a hall sensor and to move the motor to repres
 
 <b>Buy the following:</b><br>
 - Wemos d1 mini v3 :https://www.aliexpress.com/item/4000030041652.html<br>
-- Stepper motor with driver board: 28BYJ-48-5V + Driver Board ULN2003:https://www.aliexpress.com/item/1005006781616785.html<br>
+- Stepper motor with driver board: 28BYJ-48-5V + Driver Board ULN2003: https://www.aliexpress.com/item/1005006781616785.html<br>
 - KY-024 hall sensor: https://www.aliexpress.com/item/1005007847486915.html<br>
 - Magnet: https://www.aliexpress.com/item/1005004351705901.html<br>
 - M 2.5 skruvar<br>
