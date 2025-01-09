@@ -70,8 +70,14 @@ void loop() {
   // If still calibrating, let the motor run in background
   if (isCalibrating) {
     stepper.run();
+  } else {
+    // If the motor is not moving, disable the outputs to avoid unnecessary torque
+    if (stepper.distanceToGo() == 0) {
+      stepper.disableOutputs();  // Disable motor outputs to stop torque
+    }
   }
 }
+
 
 void calibrateToZero() {
   Serial.println("Calibrating to zero position...");
@@ -137,10 +143,16 @@ void fetchData() {
       int stepsToMove = targetSteps - stepper.currentPosition();
       stepper.moveTo(targetSteps);
 
+      // Re-enable motor before moving
+      stepper.enableOutputs();
+
       // Run the motor to the new position
       stepper.runToPosition();
 
       previousTandem = tandem;
+
+      // After movement, disable the motor to avoid torque
+      stepper.disableOutputs();
     } else {
       Serial.println("Error fetching data: " + String(httpCode));
     }
