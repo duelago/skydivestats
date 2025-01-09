@@ -21,6 +21,9 @@ Idea is to use a stepper motor and a hall sensor and to move the motor to repres
 - Dupont cables for soldering<br>
 - Microusb cable<p></p>
 
+</p>img width="778" alt="koppling" src="https://github.com/user-attachments/assets/3becefc6-762a-414f-a4e1-2aeb8372877c" />
+
+<p></p>
 ![konstruktion](https://github.com/user-attachments/assets/9058855b-07ca-47b3-beed-7d6d758a918f)
 
 
