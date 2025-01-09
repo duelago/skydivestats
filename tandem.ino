@@ -105,7 +105,7 @@ void calibrateToZero() {
       Serial.println("Hall sensor detected! Setting current position to zero.");
 
       // Move 110 degrees counterclockwise (assuming 2048 steps per revolution for 28BYJ-48)
-      int stepsFor110Degrees = -2048 * 200 / 360;  // Calculate steps for 110 degrees
+      int stepsFor110Degrees = -2048 * 195 / 360;  // Calculate steps for 110 degrees
       stepper.moveTo(stepsFor110Degrees);
       stepper.runToPosition();  // Move and stop
 
@@ -138,10 +138,14 @@ void fetchData() {
       int tandem = doc["result"][0]["Tandem"];
       Serial.println("Tandem: " + String(tandem));
 
+      // Handle values above 4000
+      int baseSteps = map(min(tandem, 4000), 0, 4000, 0, 4096);
+      int extraSteps = (tandem > 4000) ? tandem - 4000 : 0;
+      int totalSteps = baseSteps + extraSteps;
+
       // Calculate steps to move
-      int targetSteps = map(tandem, 0, 4000, 0, 4096);
-      int stepsToMove = targetSteps - stepper.currentPosition();
-      stepper.moveTo(targetSteps);
+      int stepsToMove = totalSteps - stepper.currentPosition();
+      stepper.moveTo(totalSteps);
 
       // Re-enable motor before moving
       stepper.enableOutputs();
@@ -163,6 +167,7 @@ void fetchData() {
   }
 }
 
+
 void handleRoot() {
   if (!server.authenticate(authUsername, authPassword)) {
     return server.requestAuthentication();
@@ -174,7 +179,7 @@ void handleRoot() {
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>JumpStats</title>
+      <title>SkyWin Stats</title>
       <style>
         body {
           font-family: 'Arial', sans-serif;
@@ -184,6 +189,10 @@ void handleRoot() {
         }
         h1 {
           color: #333;
+          text-align: center;
+        }
+        h3 {
+          color: #696969;
           text-align: center;
         }
         form {
@@ -239,13 +248,15 @@ void handleRoot() {
       </style>
     </head>
     <body>
-      <h1>JumpStats URL</h1>
+      <h1>SkyWin Stats</h1>
       <form action='/set-url' method='POST'>
         <label for='url'>JSON URL:</label>
         <input type='text' id='url' name='url' value=')rawliteral" + jsonUrl + R"rawliteral('>
         <input type='submit' value='Save'>
       </form>
       <a href='/update'>Firmware Update (OTA)</a>
+      <p></p>
+      <h3>Demo URL to fetch random number of jumps:<br> http://www.hoppaiplurret.se/jump.php </h3><p></p>
     </body>
     </html>
   )rawliteral";
