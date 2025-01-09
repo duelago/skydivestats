@@ -1,5 +1,18 @@
 # SkyWin Stats
 
+<h2>End user installation instructions</h2>
+
+1. Plug in the Altimeter to the wall with a usb charger and a micro usb-cable<br>
+2. Search your wifi networks and connect to SkyWin Stats<br>
+3. A captive portal pops up. If not start a browser and go to http://192.168.4.1<br>
+4. Give your wifi credentials. The altimeter will get an IP on your wifi network<br>
+5. Download the app Fing on your phone and scan your network to figure out the new IP for the Altimeter<br>
+6. Browse to your Altimeter webserver. In my case I got the IP http://192.168.8.111 You have another IP<br>
+7. Paste and save the url to your dropzone SkyWin API (Talk to Jesper Löfberg from SkyWin if you don't know how)<br>
+   (Demo looks like this: https://demo.skywin.se/api/v1/reports/jump-stats.json )<br>
+
+<h2>How to build your own SkyWin stats altimeter</h2>
+
 We use a 3D printed altimeter to show jump statistics from the Skywin database<p>
 
 Demo JSON url from SkyWin: https://demo.skywin.se/api/v1/reports/jump-stats.json<br>
