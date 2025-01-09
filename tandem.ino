@@ -132,9 +132,16 @@ void fetchData() {
       String payload = http.getString();
       Serial.println("Data fetched: " + payload);
 
-      DynamicJsonDocument doc(1024);
-      deserializeJson(doc, payload);
+      // Update the JSON buffer size to fit the new structure
+      DynamicJsonDocument doc(2048);
+      DeserializationError error = deserializeJson(doc, payload);
 
+      if (error) {
+        Serial.println("Failed to parse JSON!");
+        return;
+      }
+
+      // Access the "result" array and find "Tandem"
       int tandem = doc["result"][0]["Tandem"];
       Serial.println("Tandem: " + String(tandem));
 
