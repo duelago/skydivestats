@@ -28,6 +28,7 @@ Idea is to use a stepper motor and a hall sensor and to move the motor to repres
 You need to press fit the magnet to the altimeter arrow. One drop of super glue is also good for safety measures so you don't lose the magnet. Make sure that you place the magnet in the correct direction. The hall sensor will only work with the correct polarity. When working, play around with the calibaration setting in the code to make sure the arrow calibrates to 0 at boot. It can differ a few degrees depending on the position of the hall sensor.
 
 
+![magnet](https://github.com/user-attachments/assets/76e0444e-bc5e-41e1-bdf5-dba43e394bee)
 
 
 
