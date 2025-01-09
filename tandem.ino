@@ -96,12 +96,23 @@ void calibrateToZero() {
     if (digitalRead(HALL_SENSOR_PIN) == LOW) {  // Assuming LOW indicates sensor triggered
       stepper.stop();  // Stop the motor
       stepper.setCurrentPosition(0);  // Set the current position to zero
-      Serial.println("Calibration complete.");
+      Serial.println("Hall sensor detected! Setting current position to zero.");
+
+      // Move 110 degrees counterclockwise (assuming 2048 steps per revolution for 28BYJ-48)
+      int stepsFor110Degrees = -2048 * 200 / 360;  // Calculate steps for 110 degrees
+      stepper.moveTo(stepsFor110Degrees);
+      stepper.runToPosition();  // Move and stop
+
+      // Update the new zero point
+      stepper.setCurrentPosition(0);
+      Serial.println("New zero point set after moving 110 degrees counterclockwise.");
+
       isCalibrating = false;  // Mark calibration as done
       break;
     }
   }
 }
+
 
 void fetchData() {
   if (WiFi.status() == WL_CONNECTED && jsonUrl.length() > 0) {
