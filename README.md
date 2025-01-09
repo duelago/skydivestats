@@ -7,7 +7,7 @@ Demo JSON url with more random numbers between reload: http://www.hoppaiplurret.
 <br><br>
 <b>Example output:</b><br> {"name":"jump-stats","params":"[jumpYear:2025]","result":[{"Tandem":0,"NonTandem":114}],"size":2}<p></p>
 
-Idea is to use a stepper motor and a hall sensor and to move the motor to represent the number of jumps made the current season. The first version here is for tandems.<br>
+Idea is to use a stepper motor and a hall sensor and to move the motor to represent the number of jumps made the current season. The first version here is for tandems.<br><br>
 <b>Steps to do:</b>
 <br>
 - 3D print the parts. It is easiest on a Bambulab with AMS, but possible on a normal printer with two color changes.-p></p>
