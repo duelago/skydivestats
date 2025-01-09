@@ -18,7 +18,7 @@ We use a 3D printed altimeter to show jump statistics from the Skywin database<p
 Demo JSON url from SkyWin: https://demo.skywin.se/api/v1/reports/jump-stats.json<br>
 Demo JSON url with more random numbers between reload: http://www.hoppaiplurret.se/jump.php
 <br><br>
-<b>Example output:</b><br> {"name":"jump-stats","params":"[jumpYear:2025]","result":[{"Tandem":0,"NonTandem":114}],"size":2}<p></p>
+<b>Example output:</b><br> {"name":"jump-stats","params":"[jumpYear:2025]","result":[{"Total":114,"Other":90,"AFF student":0,"Static line":0,"Manual":0,"Tandem":0,"Video/photo (tandem)":0,"Cockpit":0,"Display":24,"Competition":0}],"size":2}<p></p>
 
 Idea is to use a stepper motor and a hall sensor and to move the motor to represent the number of jumps made the current season. The first version here is for tandems.<br><br>
 <b>Steps to do:</b>
