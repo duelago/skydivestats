@@ -40,7 +40,7 @@ void setup() {
 
   // WiFi configuration with WiFiManager
   WiFiManager wifiManager;
-  wifiManager.autoConnect("JumpStats");
+  wifiManager.autoConnect("SkyWin Stats");
   Serial.println("WiFi connected!");
 
   // Set up web server routes
