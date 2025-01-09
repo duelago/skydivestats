@@ -104,14 +104,14 @@ void calibrateToZero() {
       stepper.setCurrentPosition(0);  // Set the current position to zero
       Serial.println("Hall sensor detected! Setting current position to zero.");
 
-      // Move 110 degrees counterclockwise (assuming 2048 steps per revolution for 28BYJ-48)
-      int stepsFor110Degrees = -2048 * 195 / 360;  // Calculate steps for 110 degrees
+      // Move stepper to get to 0. Adjust the degrees so the arrow is straight up
+      int stepsFor110Degrees = -2048 * 195 / 360;  // Calculate steps for 195 degrees. Change accordingly
       stepper.moveTo(stepsFor110Degrees);
       stepper.runToPosition();  // Move and stop
 
       // Update the new zero point
       stepper.setCurrentPosition(0);
-      Serial.println("New zero point set after moving 110 degrees counterclockwise.");
+      Serial.println("New zero point set after moving 195 degrees to 0");
 
       isCalibrating = false;  // Mark calibration as done
       break;
@@ -263,7 +263,7 @@ void handleRoot() {
       </form>
       <a href='/update'>Firmware Update (OTA)</a>
       <p></p>
-      <h3>Demo URL to fetch random number of jumps:<br> http://www.hoppaiplurret.se/jump.php </h3><p></p>
+      <h3>SkyWinOne 24.0.1 or newer needed for it to work<br>Demo URL to fetch random number of jumps:<br> http://www.hoppaiplurret.se/jump.php </h3><p></p>
     </body>
     </html>
   )rawliteral";
