@@ -39,4 +39,5 @@ Idea is to use a stepper motor and a hall sensor and to move the motor to repres
 <img width="1120" alt="Screenshot 2025-01-09 at 13 37 44" src="https://github.com/user-attachments/assets/b1154d37-042d-4638-ad00-f5998d7a0614" />
 
 
+![konstruktion](https://github.com/user-attachments/assets/51103a65-30be-4187-b6d7-d2adb28c1851)
 
