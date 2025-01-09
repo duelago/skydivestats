@@ -17,7 +17,7 @@ Idea is to use a stepper motor and a hall sensor and to move the motor to repres
 - Stepper motor with driver board: 28BYJ-48-5V + Driver Board ULN2003: https://www.aliexpress.com/item/1005006781616785.html<br>
 - KY-024 hall sensor: https://www.aliexpress.com/item/1005007847486915.html<br>
 - Magnet: https://www.aliexpress.com/item/1005004351705901.html<br>
-- M 2.5 skruvar<br>
+- M 2.5 screws<br>
 - Dupont cables for soldering<br>
 - Microusb cable<p></p>
 <img width="778" alt="koppling" src="https://github.com/user-attachments/assets/d51a984a-0ed5-4f79-a765-7448604af6c3" />
