@@ -6,7 +6,7 @@
 2. Search your wifi networks and connect to SkyWin Stats<br>
 3. A captive portal pops up. If not start a browser and go to http://192.168.4.1<br>
 4. Give your wifi credentials. The altimeter will get an IP on your wifi network<br>
-5. Connect to http://skywinstats.local (You must be connected to the same network with your device) <br>
+5. Connect to http://skywinstats.local (You must be connected to the same wifi with your device) <br>
 5b. If above does not work. Download the app Fing on your phone and scan your network to figure out the new IP for the Altimeter<br>
 5c. Browse your Altimeter webserver på IP. In my case I got the IP http://192.168.8.111 You have another IP<br>
 6. Login on website. user: skydive  passwd: jump<br>
