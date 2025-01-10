@@ -128,17 +128,18 @@ void fetchData() {
         return;
       }
 
-      int tandem = doc["result"][0]["Tandem"];
-      Serial.println("Tandem: " + String(tandem));
+      // Fetch the "Total" field instead of "Tandem"
+      int total = doc["result"][0]["Total"];
+      Serial.println("Total: " + String(total));
 
       // Adjust movement logic for new scale (0-12000)
-      int totalSteps = map(constrain(tandem, 0, 12000), 0, 12000, 0, 4096);
+      int totalSteps = map(constrain(total, 0, 12000), 0, 12000, 0, 4096);
       int stepsToMove = totalSteps - stepper.currentPosition();
 
       stepper.enableOutputs();
       stepper.moveTo(totalSteps);
       stepper.runToPosition();
-      previousTandem = tandem;
+      previousTandem = total; // Update with the new field
       stepper.disableOutputs();
     } else {
       Serial.println("Error fetching data: " + String(httpCode));
@@ -148,6 +149,7 @@ void fetchData() {
     Serial.println("WiFi not connected or URL not set");
   }
 }
+
 
 void handleRoot() {
   if (!server.authenticate(authUsername, authPassword)) {
