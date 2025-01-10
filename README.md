@@ -8,7 +8,7 @@
 4. Give your wifi credentials. The altimeter will get an IP on your wifi network<br>
 5. Connect to http://skywinstats.local (You must be connected to the same wifi with your device) <br>
 5b. If above does not work. Download the app Fing on your phone and scan your network to figure out the new IP for the Altimeter. (It shows up as skywinstats or Generic device) <br>
-5c. Browse your Altimeter webserver på IP. In my case I got the IP http://192.168.8.111 You have another IP<br>
+5c. Browse your Altimeter webservers IP-address. In my case I got the IP http://192.168.8.111 You have another IP<br>
 6. Login on website. user: skydive  passwd: jump<br>
 7. Add the url to your dropzone JSON API, SkyWinOne 24.0.1 or later. (Talk to Jesper Löfberg at SkyWin if you don't know how)<br>
    (Demo looks like this: https://demo.skywin.se/api/v1/reports/jump-stats.json )<br>
