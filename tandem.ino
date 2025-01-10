@@ -1,6 +1,7 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include <ESP8266WebServer.h>
+#include <ESP8266mDNS.h>
 #include <ArduinoJson.h>
 #include <AccelStepper.h>
 #include <WiFiManager.h>
@@ -38,10 +39,18 @@ void setup() {
   // Load URL from EEPROM
   loadUrlFromEEPROM();
 
-  // WiFi configuration with WiFiManager
   WiFiManager wifiManager;
   wifiManager.autoConnect("SkyWin Stats");
   Serial.println("WiFi connected!");
+
+  // Initialize mDNS
+  if (MDNS.begin("skywinstats")) {
+    Serial.println("mDNS responder started. Access your ESP at http://skywinstats.local");
+    // Add web service to mDNS
+    MDNS.addService("http", "tcp", 80);
+  } else {
+    Serial.println("Error starting mDNS responder!");
+  }
 
   // Set up web server routes
   server.on("/", HTTP_GET, handleRoot);
@@ -60,6 +69,8 @@ void setup() {
 
 void loop() {
   server.handleClient();
+  MDNS.update(); // Handle mDNS requests
+  
 
   // Check if it's time to fetch the data
   if (millis() - lastFetchTime >= fetchInterval) {
