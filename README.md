@@ -25,7 +25,7 @@ Demo JSON url with more random numbers between reload: http://www.hoppaiplurret.
 Idea is to use a stepper motor and a hall sensor and to move the motor to represent the number of jumps made the current season. The first version here is for tandems.<br><br>
 <b>Steps to do:</b>
 <br>
-- 3D print the parts. It is easiest on a Bambulab with AMS, but possible on a normal printer with two color changes.<p></p>
+- 3D print the parts. It is easiest on a Bambulab with AMS, but possible on a normal printer with two color changes.Print the back cover in two parts with connectors so you can open up the construction after it is finished. (I do this in Prusa slicer but it was not possible to export ready made stl files with the connectors added)<p></p>
 
 <b>Buy the following:</b><br>
 - Wemos d1 mini v3 :https://www.aliexpress.com/item/4000030041652.html<br>
