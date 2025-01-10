@@ -12,6 +12,7 @@
 6. Login on website. user: skydive  passwd: jump<br>
 7. Add the url to your dropzone JSON API, SkyWinOne 24.0.1 or later. (Talk to Jesper Löfberg at SkyWin if you don't know how)<br>
    (Demo looks like this: https://demo.skywin.se/api/v1/reports/jump-stats.json )<br>
+8. Done! The url is stored in EEPROM and will survive a power failure. The unit will also recalibrate itself if it loses power.
 
 <h2>How to build your own SkyWin stats altimeter</h2>
 
