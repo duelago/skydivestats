@@ -116,13 +116,13 @@ void calibrateToZero() {
       Serial.println("Hall sensor detected! Setting current position to zero.");
 
       // Move stepper to get to 0. Adjust the degrees so the arrow is straight up
-      int stepsFor110Degrees = -2048 * 195 / 360;  // Calculate steps for 195 degrees. Change accordingly
+      int stepsFor110Degrees = -2048 * 199 / 360;  // Calculate steps for 195 degrees. Change accordingly
       stepper.moveTo(stepsFor110Degrees);
       stepper.runToPosition();  // Move and stop
 
       // Update the new zero point
       stepper.setCurrentPosition(0);
-      Serial.println("New zero point set after moving 195 degrees to 0");
+      Serial.println("New zero point set after moving 199 degrees to 0");
 
       isCalibrating = false;  // Mark calibration as done
       break;
