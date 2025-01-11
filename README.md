@@ -35,6 +35,7 @@ Idea is to use a stepper motor and a hall sensor and to move the motor to repres
 - Magnet: https://www.aliexpress.com/item/1005004351705901.html<br>
 - M 2.5 screws<br>
 - Dupont cables for soldering<br>
+- Superglue to glue the 3D printed part for the components to the backside of the watchface<br>
 - Microusb cable<p></p>
 <img width="778" alt="koppling" src="https://github.com/user-attachments/assets/d51a984a-0ed5-4f79-a765-7448604af6c3" />
 
