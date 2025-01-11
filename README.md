@@ -1,7 +1,9 @@
 # SkyWin Stats
 
-<h1>3D printed wall mounted instrument that displays jump data from SkyWin</h1>
-![alti](https://github.com/user-attachments/assets/45d295b1-8609-467b-9304-277c8cd3d057)
+<h1>Wall mounted instrument that displays jump data</h1>
+
+![alti](https://github.com/user-attachments/assets/93a92640-888f-4fc3-8e9a-6e24b0e250ef)
+
 
 
 <h2>End user installation instructions</h2>
