@@ -1,5 +1,9 @@
 # SkyWin Stats
 
+<h1>3D printed wall mounted instrument that displays jump data from SkyWin</h1>
+![alti](https://github.com/user-attachments/assets/45d295b1-8609-467b-9304-277c8cd3d057)
+
+
 <h2>End user installation instructions</h2>
 
 1. Plug in the Altimeter to the wall with a usb charger and a micro usb-cable<br>
