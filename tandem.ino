@@ -22,6 +22,11 @@ String jsonUrl;
 int previousTandem = 0;
 unsigned long lastFetchTime = 0;
 
+// === Kalibreringsvinkel ===
+// Justera denna vinkel för att kalibrera pilens position
+const int CALIBRATION_ANGLE = 199;  // Ändra värdet här för att justera vinkel
+
+// === Tid mellan uppdatering ===
 // const unsigned long fetchInterval = 20000; // 20 seconds for testing
 const unsigned long fetchInterval = 3600000; // Kolla en gång per timme 
 
@@ -117,14 +122,14 @@ void calibrateToZero() {
       stepper.setCurrentPosition(0);  // Set the current position to zero
       Serial.println("Hall sensor detected! Setting current position to zero.");
 
-      // Move stepper to get to 0. Adjust the degrees so the arrow is straight up (Change the value 199)
-      int stepsFor110Degrees = -2048 * 199 / 360;  // Calculate steps for 195 degrees. Change accordingly
+      // Move stepper to get to 0. Adjust the degrees so the arrow is straight up
+      int stepsFor110Degrees = -2048 * CALIBRATION_ANGLE / 360;  // Calculate steps for CALIBRATION_ANGLE degrees
       stepper.moveTo(stepsFor110Degrees);
       stepper.runToPosition();  // Move and stop
 
       // Update the new zero point
       stepper.setCurrentPosition(0);
-      Serial.println("New zero point set after moving 199 degrees to 0");
+      Serial.println("New zero point set after moving " + String(CALIBRATION_ANGLE) + " degrees to 0");
 
       isCalibrating = false;  // Mark calibration as done
       break;
