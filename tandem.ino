@@ -21,7 +21,9 @@ AccelStepper stepper(AccelStepper::HALF4WIRE, IN1, IN3, IN2, IN4);
 String jsonUrl;
 int previousTandem = 0;
 unsigned long lastFetchTime = 0;
-const unsigned long fetchInterval = 20000; // 20 seconds for testing
+
+// const unsigned long fetchInterval = 20000; // 20 seconds for testing
+const unsigned long fetchInterval = 3600000; // Kolla en gång per timme 
 
 const char* authUsername = "skydive";
 const char* authPassword = "jump";
